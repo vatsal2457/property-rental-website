@@ -1,23 +1,37 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleIsLogin } from "../../ReduxStore/isLoginSlice";
+import { NavLink, useNavigate } from "react-router-dom";
 function LoginPage() {
   const [res,setRes] = useState('')
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleLoginUser = async (e) => {
     e.preventDefault();
-    const res = await axios({
+
+    const response = await axios({
       method: "post",
-      url: "http://localhost:8000/api/user/login",
+      url: `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/login`,
       data: {
         email: email,
         password: password,
       },
-    });
-    
-    setRes(res)
+      withCredentials:true
+    })
+    .catch(err => {
+      setRes(err?.response?.data?.message)
+    })
+
+    if(response){     
+      setRes(response?.data?.message)
+      dispatch(toggleIsLogin())
+      navigate('/');
+    }
+   
 
   };
   return (

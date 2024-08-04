@@ -1,18 +1,16 @@
-const express =  require('express')
-const { Router } =  require('express')
-const  UserRouter=  Router()
-const {handleSignupUser,handleLoginUser} =  require('../controllers/Users.js')
+import { Router } from 'express'
+import {handleSignupUser, handleLoginUser} from '../controllers/Users.controller.js'
 
+const  UserRouter = Router();
 
-
-UserRouter.route('/signup')
+UserRouter.route('/signup') // http://localhost:3000/api/user/signup
 .post(handleSignupUser)
 
-UserRouter.route('/login')
+UserRouter.route('/login') // http://localhost:3000/api/user/login
 .post(handleLoginUser)
 
 
-module.exports = {
+export{
     UserRouter
 }
 

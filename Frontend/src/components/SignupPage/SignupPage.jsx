@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+
 function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,24 +19,25 @@ function SignupPage() {
       setRes('Please fill Password')
     }
     else{
-    
-    const res = await axios({
-      url: "http://localhost:8000/api/user/signup",
-      method: "post",
-      data: {
-        name: name,
-        email: email,
-        password: password,
-      },
-    }).catch((err) => {
-      setRes(err);
-    });
-    if(res.data){
-      setName('')
-      setEmail('')
-      setPassword('')
-    }
-    setRes(res);
+     const response =  await axios({
+       url: `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/signup`,
+       method: "post",
+       data: {
+         name: name,
+         email: email,
+         password: password,
+       },
+     })
+     .catch(err=>{
+      setRes(err?.response?.data?.message)
+     })
+
+     if(response){
+     setRes(response?.data?.message);
+     setName('')
+     setEmail('')
+     setPassword('')
+     }
   }
 };
 

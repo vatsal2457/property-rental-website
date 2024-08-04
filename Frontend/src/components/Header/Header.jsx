@@ -5,7 +5,9 @@ import SideBar from "../SideBar/SideBar";
 import { toggleLoginLogoutbar } from "../../ReduxStore/loginLogoutBar";
 import LoginLogoutBar from '../LgnLgoBar/LgnLgoBar'
 import { toggleSidebar } from "../../ReduxStore/sidebarSlice";
+import { useSelector } from "react-redux";
 function Header() {
+  const isLogin = useSelector(state => state?.isLogin?.value);
   const dispatch = useDispatch();
   return (
     <div>
@@ -61,6 +63,19 @@ function Header() {
         </div>
         <div className="flex items-center justify-end  w-auto">
           {
+            isLogin ?
+            <NavLink
+            onClick={(e)=>{
+              e.preventDefault()
+              dispatch(toggleLoginLogoutbar())
+            }}
+            >
+              <img 
+              src="/login.png" 
+              className="w-9 h-9  ml-10 md:ml-20 lg:w-12 lg:h-12  active:shadow-xl"
+              alt="not login photo"  />
+            </NavLink>
+            :
             <NavLink
             onClick={(e)=>{
               e.preventDefault()
@@ -72,8 +87,7 @@ function Header() {
               className="w-9 h-9  ml-10 md:ml-20 lg:w-12 lg:h-12  active:shadow-xl"
               alt="not login photo"  />
             </NavLink>
-
-
+            
           }
         </div>
       </div>

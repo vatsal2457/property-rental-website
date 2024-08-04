@@ -17,6 +17,9 @@ import SignupPage from "./components/SignupPage/SignupPage.jsx";
 import { Provider } from "react-redux";
 import { store } from "./ReduxStore/Store.js";
 import UserProperty from "./components/UserProperty/UserProperty.jsx";
+
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
