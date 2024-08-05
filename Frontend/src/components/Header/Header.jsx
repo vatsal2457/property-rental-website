@@ -3,9 +3,10 @@ import { NavLink, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SideBar from "../SideBar/SideBar";
 import { toggleLoginLogoutbar } from "../../ReduxStore/loginLogoutBar";
-import LoginLogoutBar from '../LgnLgoBar/LgnLgoBar'
+import LoginSignupBar from '../LgnSnpBar/LgnSnpBar'
 import { toggleSidebar } from "../../ReduxStore/sidebarSlice";
 import { useSelector } from "react-redux";
+
 function Header() {
   const isLogin = useSelector(state => state?.isLogin?.value);
   const dispatch = useDispatch();
@@ -92,7 +93,8 @@ function Header() {
         </div>
       </div>
       <SideBar />
-      <LoginLogoutBar/>
+     <LoginSignupBar/>
+      
     </div>
   );
 }

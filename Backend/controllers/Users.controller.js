@@ -59,7 +59,6 @@ async function handleLoginUser(req, res) {
    * if user exist send access and refresh token
    * redirect to home page
    */
-  console.log('cookie - ',req?.cookies?.uid)
   const body = req.body;
   body.email = body.email.toLowerCase();
 
@@ -72,22 +71,18 @@ async function handleLoginUser(req, res) {
     const passMatch = await bcrypt.compare(body.password, user[0].password);
 
     if (passMatch) {
-
-        const payload = {
-        name: user[0].name,
-        _id: user[0]._id
-      };
-
+      const token = await user[0].generateToken();
       const options = {
         httpOnly:true,
-        secure:false,
+        secure: true,
       }
-      
-      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
       return res
       .cookie("uid", token,options)
-      .setHeader("uid", token,options)
-      .json({message:'Login Successfull'});
+      .setHeader("uid", token, options)
+      .json({
+        message:'Login Successfull',
+        user,
+      });
     } 
     else {
       res.status(400).json({message:'Invalid Password'})

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleIsLogin } from "../../ReduxStore/isLoginSlice";
+import {setUserId,setUsername} from '../../ReduxStore/userDetailsSlice.js'
 import { NavLink, useNavigate } from "react-router-dom";
 function LoginPage() {
+
   const [res,setRes] = useState('')
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,11 +29,14 @@ function LoginPage() {
     })
 
     if(response){     
+      console.log(response)
+      const data = response?.data?.user[0];
       setRes(response?.data?.message)
       dispatch(toggleIsLogin())
+      dispatch(setUserId(data._id))
+      dispatch(setUsername(data.name))
       navigate('/');
     }
-   
 
   };
   return (
