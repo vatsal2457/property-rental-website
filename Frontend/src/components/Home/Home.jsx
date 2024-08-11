@@ -25,7 +25,7 @@ function Home() {
 
       <div className="text-slate-200 flex flex-col items-center mt-16 lg:mt-20">
         <h1 className="text-2xl font-bold md:text-3xl">
-          How to Sell your Property ?
+          How to Sell/Rent your Property ?
         </h1>
 
         <div className="flex flex-col lg:grid lg:grid-cols-3 justify-items-center items-center space-y-5 w-full  text-2xl mt-4">

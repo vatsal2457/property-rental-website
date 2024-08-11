@@ -1,12 +1,52 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { toggleSidebar } from "../../ReduxStore/sidebarSlice";
-
 import { useDispatch ,useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 function SideBar() {
   const sidebarOpen = useSelector((state) => state.sidebar.value)
   const dispatch = useDispatch()
-  
+  const navigate = useNavigate();
+
+  const handleAddProperty = async(e)=>{
+    e.preventDefault();
+    
+      await axios({
+        method:'GET',
+        url:`${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/addProperty`,
+        withCredentials:true
+      }).then((res)=>{
+        navigate('/addproperty')
+        dispatch(toggleSidebar())
+      })
+      .catch((err)=>{
+        navigate('/login');
+        dispatch(toggleSidebar())
+        alert(err?.response?.data?.message)
+      })
+    
+  }
+  const handleYourProperties = async(e)=>{
+      e.preventDefault();
+      
+        await axios({
+          method:'GET',
+          url:`${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/yourProperties`,
+          withCredentials:true
+        })
+        .then(res => {
+          navigate('/userproperties')
+          dispatch(toggleSidebar())
+        })
+        .catch(err =>{
+          navigate('/login')
+          dispatch(toggleSidebar())
+          console.log(err?.response?.data?.message)
+          alert(err?.response?.data?.message);
+        })
+      }
+       
   return (
     <div
       className={`w-1/2 h-1/3 md:w-1/4 xl:w-1/6 fixed  top-0 text-base md:text-lg xl:text-xl  left-0 mt-16 pl-3 transition-transform  ease-in-out  bg-slate-900 text-white font-serif opacity-95 ${
@@ -24,14 +64,12 @@ function SideBar() {
         </div>
         <div className="hover:text-amber-600  border-b-white   border border-black w-full  ">
           <NavLink
-          to="/addproperty"
-          onClick={()=>{dispatch(toggleSidebar())}}
+          onClick={handleAddProperty}
           >Add Property +</NavLink>
         </div>
         <div className="hover:text-amber-600  border-b-white   border border-black w-full  ">
           <NavLink
-          to="/userproperties"
-          onClick={()=>{dispatch(toggleSidebar())}}
+          onClick={handleYourProperties}
           >Your Properties</NavLink>
         </div>
         <div className="hover:text-amber-600  border-b-white   border border-black w-full  ">

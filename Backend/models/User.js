@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name:{
         type:String,
     },
@@ -21,7 +21,7 @@ UserSchema.methods.generateToken = async function (){
             name:this.name,
             id: this._id
         }
-        return jwt.sign(payload,process.env.JWT_SECRET_KEY)
+        return jwt.sign(payload,process.env.JWT_SECRET_KEY,{expiresIn:'2d'})
     } catch (error) {
         console.log("error - ",error)
     }

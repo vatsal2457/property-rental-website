@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleIsLogin } from "../../ReduxStore/isLoginSlice";
@@ -6,13 +6,13 @@ import {setUserId,setUsername} from '../../ReduxStore/userDetailsSlice.js'
 import { NavLink, useNavigate } from "react-router-dom";
 function LoginPage() {
 
-  const [res,setRes] = useState('')
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
   const handleLoginUser = async (e) => {
+
     e.preventDefault();
 
     const response = await axios({
@@ -25,19 +25,19 @@ function LoginPage() {
       withCredentials:true
     })
     .catch(err => {
-      setRes(err?.response?.data?.message)
+      alert(err?.response?.data?.message)
     })
 
     if(response){     
-      console.log(response)
       const data = response?.data?.user[0];
-      setRes(response?.data?.message)
+      localStorage.setItem('token',response?.data?.token);
+      localStorage.setItem('name',data.name)
       dispatch(toggleIsLogin())
-      dispatch(setUserId(data._id))
-      dispatch(setUsername(data.name))
+      dispatch(setUsername(localStorage.getItem('name')))
+      alert(response?.data?.message)
       navigate('/');
-    }
-
+    } 
+    
   };
   return (
     <div className="pt-16 md:pt-20 w-full flex justify-center items-center  ">
@@ -96,19 +96,7 @@ function LoginPage() {
           </h1>
         </div>
       </div>
-      {res == "" ? (
-        ""
-      ) : (
-        <div
-          className={`h-auto md:w-1/3 lg:w-1/4 xl:w-1/6  text-xl px-2 py-1 bottom-0 absolute mb-48 right-0 md:mt-20  pl-3 transition-transform  ease-in-out   bg-red-500 text-white border border-white rounded-xl font-serif  ${
-            res?.data || res
-              ? "duration-500 translate-x-0"
-              : " duration-500 translate-x-full"
-          }`}
-        >
-          {res?.data || res} 
-        </div>
-      )}
+      
     </div>
   );
 }

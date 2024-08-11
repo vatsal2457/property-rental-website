@@ -1,22 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SignupPage() {
+  const navigate = useNavigate()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [res, setRes] = useState('');
 
   const handleSignupUser = async (e) => {
     e.preventDefault();
     if(name==''){
-       setRes('Please fill name')
+       alert('Please fill name')
     }
     else if(email==''){
-      setRes('Please fill Email')
+      alert('Please fill Email')
     }
     else if(password==''){
-      setRes('Please fill Password')
+      alert('Please fill Password')
     }
     else{
      const response =  await axios({
@@ -29,14 +30,15 @@ function SignupPage() {
        },
      })
      .catch(err=>{
-      setRes(err?.response?.data?.message)
+      alert(err?.response?.data?.message)
      })
 
      if(response){
-     setRes(response?.data?.message);
+     alert(response?.data?.message);
      setName('')
      setEmail('')
      setPassword('')
+     navigate('/login')
      }
   }
 };
@@ -103,19 +105,7 @@ function SignupPage() {
           </button>
         </div>
       </div>
-      {res == "" ? (
-        ""
-      ) : (
-        <div
-          className={`h-auto md:w-1/3 lg:w-1/4 xl:w-1/6  text-xl px-2 py-1 bottom-0 absolute mb-48 right-0 md:mt-20  pl-3 transition-transform  ease-in-out   bg-red-500 text-white border border-white rounded-xl font-serif  ${
-            res?.data || res
-              ? "duration-500 translate-x-0"
-              : " duration-500 translate-x-full"
-          }`}
-        >
-          {res?.data || res} 
-        </div>
-      )}
+      
     </div>
   );
 }

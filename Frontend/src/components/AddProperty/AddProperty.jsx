@@ -1,42 +1,98 @@
 import React, { useEffect, useState } from "react";
 import { State } from "../../Data/States";
+import axios from 'axios'
+import { useRef } from "react";
 
 function AddProperty() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phNumber, setphNumber] = useState("");
-  const [sellOrRent, setSellOrRent] = useState("");
-  const [propertyType, setPropertyType] = useState();
-  const [bhkType, setBhkType] = useState();
-  const [area, setArea] = useState();
-  const [floor, setFloor] = useState();
-  const [state, setState] = useState();
-  const [city, setCity] = useState([]);
-  const [address, setAddress] = useState("");
-  const [price, setPrice] = useState();
-  const [rent, setRent] = useState("");
-  const [age, setAge] = useState();
-  const [image, setImage] = useState();
-  const [cities, setCities] = useState();
-  const [deposit, setDeposit] = useState("");
+  const imgRef = useRef(null)
 
-  const [uploadedImages, setUploadedImages] = useState();
+  const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [phNumber, setphNumber] = useState('');
+  const [sellOrRent, setSellOrRent] = useState('');
+  const [propertyType, setPropertyType] = useState('');
+  const [bhkType, setBhkType] = useState('');
+  const [area, setArea] = useState('');
+  const [floor, setFloor] = useState('');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
+  const [address, setAddress] = useState('');
+  const [price, setPrice] = useState('');
+  const [rent, setRent] = useState('');
+  const [age, setAge] = useState('');
+  const [images, setImages] = useState([]);
+  const [cities, setCities] = useState();
+  const [deposit, setDeposit] = useState('');
+  const [files, setFiles] = useState([]);
+  
 
   useEffect(() => {
     setCities(State.find((item) => item.state == state)?.district);
   }, [state]);
 
-  const convertImageToBase64 = (e) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      console.log(reader.result);
-      setImage(reader.result);
-    };
-  };
+const handleSubmitProperty = async() =>{
+  if(
+    fullname =="" ||
+    email =="" ||
+    phNumber =="" ||
+    propertyType =="" ||
+    sellOrRent == "" ||
+    bhkType =="" ||
+    area =="" ||
+    floor =="" ||
+    (rent == "" && price == "") ||
+    age =="" ||
+    state =="" ||
+    city =="" ||
+    address =="" || 
+    deposit ==""
+  ){
+    alert('Fill all details')
+    return;
+  }
+
+  const formData = new FormData();
+
+  for(let i=0 ; i<files.length; i++){
+    formData.append('propertyImage', files[i]);
+  }
+
+  formData.append('fullname',fullname)
+  formData.append('email',email)
+  formData.append('phNumber',phNumber)
+  formData.append('propertyType',propertyType)
+  formData.append('sellOrRent',sellOrRent)
+  formData.append('bhkType',bhkType)
+  formData.append('area',area)
+  formData.append('floor',floor)
+  formData.append('rent',rent)
+  formData.append('price',price)
+  formData.append('age',age)
+  formData.append('state',state)
+  formData.append('city',city)
+  formData.append('address',address)
+  formData.append('deposit', deposit)
+
+  
+  await axios({
+    url:`${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/addProperty`,
+    method:'POST',
+    withCredentials:true,
+    data: formData
+  })
+    .then((res)=>{
+      alert('sent')
+      console.log(res)
+    })
+    .catch(err => {
+      alert('error')
+      console.log(err)
+    })
+
+}
 
   const handleResetForm = () => {
-    setName("");
+    setFullname("");
     setEmail("");
     setphNumber("");
     setSellOrRent("");
@@ -50,11 +106,22 @@ function AddProperty() {
     setPrice("");
     setAge("");
     setCities();
+    imgRef.current.value=''
   };
 
-  // const handleImages = (e) =>{
-  //     console.log(e.target.files[0])
-  // }
+  const handleImages = async(e) =>{
+    e.preventDefault();
+    const imgArray = Array.from(e.target.files);
+    if(imgArray.length > 5){
+      alert('You can only select upto 5 images')
+      return;
+    }
+    setFiles(e.target.files)
+    const images = imgArray.map(item => URL.createObjectURL(item))
+    setImages(images);
+  }
+
+
 
   return (
     <div className="pt-16 md:pt-20 flex justify-center ">
@@ -73,10 +140,11 @@ function AddProperty() {
                 <input
                   className="border border-black rounded-md px-1 py-1 "
                   placeholder="Enter Full Name"
+                  required
                   type="text"
-                  value={name}
+                  value={fullname}
                   onChange={(e) => {
-                    setName(e.target.value);
+                    setFullname(e.target.value);
                   }}
                 />
               </div>
@@ -97,6 +165,7 @@ function AddProperty() {
                 <input
                   className="border border-black rounded-md px-1 py-1"
                   placeholder="Enter Phone Number"
+                  required
                   type="text"
                   value={phNumber}
                   onChange={(e) => {
@@ -116,6 +185,7 @@ function AddProperty() {
                 <select
                   className="border border-black"
                   value={propertyType}
+                  required
                   onChange={(e) => {
                     setPropertyType(e.target.value);
                   }}
@@ -134,6 +204,7 @@ function AddProperty() {
                 <h1>You are Looking to :</h1>
                 <select
                   className="border border-black"
+                  required
                   value={sellOrRent}
                   onChange={(e) => {
                     setSellOrRent(e.target.value);
@@ -150,6 +221,7 @@ function AddProperty() {
                 <h1>BHK type :</h1>
                 <select
                   className="border border-black"
+                  required
                   value={bhkType}
                   onChange={(e) => {
                     setBhkType(e.target.value);
@@ -170,8 +242,9 @@ function AddProperty() {
                 <h1>Area (sq. ft):</h1>
                 <input
                   className="border border-black rounded-md px-1 py-1  w-4/12"
+                  required
                   min="0"
-                  type="Number"
+                  type="tel"
                   placeholder="Area"
                   value={area}
                   onChange={(e) => {
@@ -184,7 +257,9 @@ function AddProperty() {
                 <input
                   className="border border-black rounded-md px-1 py-1 w-1/3 "
                   placeholder="Floor"
-                  type="number"
+                  required
+                  type="tel"
+                  defaultValue={0}
                   value={floor}
                   onChange={(e) => {
                     setFloor(e.target.value);
@@ -200,7 +275,7 @@ function AddProperty() {
                   <input
                     className="border border-black rounded-md px-1 py-1 "
                     placeholder="Enter Price"
-                    type="Number"
+                    type="tel"
                     min="0"
                     value={price}
                     onChange={(e) => {
@@ -214,7 +289,7 @@ function AddProperty() {
                   <input
                     className="border border-black rounded-md px-1 py-1 "
                     placeholder="Enter Rent"
-                    type="Number"
+                    type="tel"
                     min="0"
                     value={rent}
                     onChange={(e) => {
@@ -229,7 +304,7 @@ function AddProperty() {
                   <input
                     className="border border-black rounded-md px-1 py-1 "
                     placeholder="Deposit"
-                    type="Number"
+                    type="tel"
                     min="0"
                     value={deposit}
                     onChange={(e) => {
@@ -245,8 +320,9 @@ function AddProperty() {
                 <input
                   className="border border-black w-1/2 rounded-md px-1 py-1"
                   placeholder="Enter Age"
+                  required
                   min="0"
-                  type="number"
+                  type="tel"
                   value={age}
                   onChange={(e) => {
                     setAge(e.target.value);
@@ -259,6 +335,7 @@ function AddProperty() {
                 <select
                   className="border border-black"
                   value={state}
+                  required
                   onChange={(e) => {
                     setState(e.target.value);
                   }}
@@ -277,6 +354,7 @@ function AddProperty() {
                 <select
                   className="border border-black"
                   value={city}
+                  required
                   onChange={(e) => {
                     setCity(e.target.value);
                   }}
@@ -295,6 +373,7 @@ function AddProperty() {
                   className="border border-black rounded-md px-1 py-1   "
                   placeholder="Enter Address"
                   type="text"
+                  required
                   value={address}
                   onChange={(e) => {
                     setAddress(e.target.value);
@@ -311,36 +390,31 @@ function AddProperty() {
                 </div>
                 <div className="flex justify-start h-auto">
                   <input
-                    className=" rounded-md  w-2/5 min-h-min mt-5 text-white "
+                    className=" rounded-md w-2/5 text-white min-h-min mt-5  "
+                    name="propertyImage"
+                    multiple
                     accept="image/*"
-                    onChange={convertImageToBase64}
+                    onChange={handleImages}
                     type="file"
+                    ref={imgRef}
                   />
-                  {image == "" || image == null ? (
-                    ""
-                  ) : (
-                    <div className="w-auto bg-red-400 flex justify-center ">
-                      <img src={image} alt="images" className="h-14 w-20 " />
-                    </div>
-                  )}
-                  <div>
-                    <button className="px-4 py-2 ml-5 text-sm mt-5 bg-blue-500 active:bg-blue-600 rounded border border-black text-white">
-                      Upload
-                    </button>
-                  </div>
                 </div>
+                {
+                  images[0]==undefined ? 
+                  <></>
+                  :
+                  <div className=" h-full w-full border border-black rounded-md flex flex-wrap justify-evenly mt-4 ">
+                  {
+                    images.map((item,index) => 
+                    <div className=" h-24 w-24 mt-2 border border-black flex items-center justify-center ">
+                    <img src={item} key={index} alt="image" className=" h-full w-full object-cover"/>
+                    </div>
+                  )
+                  }
+                </div>
+                }
               </div>
 
-              <div className="mt-7">
-                <h1>Uploaded Images :</h1>
-                {uploadedImages == "" || uploadedImages == null ? (
-                  ""
-                ) : (
-                  <div className="w-full border flex justify-center border-black">
-                    Uploaded Images
-                  </div>
-                )}
-              </div>
             </div>
           </div>
         </div>
@@ -351,7 +425,10 @@ function AddProperty() {
           >
             Reset
           </button>
-          <button className="text-xl px-4 py-1 bg-blue-500 active:bg-blue-600 text-white border border-black rounded-xl">
+          <button 
+          className="text-xl px-4 py-1 bg-blue-500 active:bg-blue-600 text-white border border-black rounded-xl"
+          onClick={handleSubmitProperty}
+          >
             Submit
           </button>
         </div>

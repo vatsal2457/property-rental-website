@@ -7,7 +7,11 @@ export const isLoginSlice = createSlice({
     },
     reducers:{
         toggleIsLogin: (state,action) =>{
-            state.value ? (state.value = false) : (state.value = true)
+            if(localStorage.getItem('token')){
+                state.value =true;
+            }else{
+                state.value=false;
+            }
         },
     }
 })

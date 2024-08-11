@@ -1,15 +1,54 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { toggleLoginLogoutbar } from "../../ReduxStore/loginLogoutBar";
+import { toggleIsLogin } from "../../ReduxStore/isLoginSlice";
+import axios from 'axios'
 
 
 function loginSignupBar() {
-
+  const navigate = useNavigate()
   const loginLogoutBarOpen = useSelector((state) => state.loginLogoutBar.value);
   const username = useSelector(state => state.userDetails.username)
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.isLogin.value);
+  
+  const handleLogoutUser = async(e) =>{
+      e.preventDefault();
+
+       await axios({
+         method:'GET',
+         url:`${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/logout`,
+         withCredentials:true,
+       })
+       .then((res)=>{
+       localStorage.removeItem('name')
+       localStorage.removeItem('_id')
+       localStorage.removeItem('token')
+       dispatch(toggleIsLogin())
+       dispatch(toggleLoginLogoutbar())
+       navigate('/')
+       console.log(res)
+       alert(res?.data?.message)
+       })
+       .catch((err)=>{
+        localStorage.removeItem('name')
+        localStorage.removeItem('_id')
+        localStorage.removeItem('token')
+        dispatch(toggleIsLogin())
+        dispatch(toggleLoginLogoutbar())
+        navigate('/')
+        alert(err?.response?.data?.message)
+       })
+       
+    
+     
+      
+      
+     
+    
+  }
   
   return (
     <div
@@ -40,10 +79,7 @@ function loginSignupBar() {
         {isLogin ? (
           <div className="text-red-500  border-b-white  text-center border border-black w-full pt-2  ">
             <NavLink
-              to="/logout"
-              onClick={() => {
-                dispatch(toggleLoginLogoutbar());
-              }}
+              onClick={handleLogoutUser}
             >
               Logout
             </NavLink>
