@@ -36,7 +36,7 @@ function Header() {
             />
 
             <div className="text-md font-bold md:text-2xl lg:text-2xl xl:text-3xl  ">
-              <h1>Property Rentals</h1>
+              <h1>Property Rental</h1>
             </div>
           </div>
         </div>

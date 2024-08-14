@@ -14,11 +14,11 @@ function Home() {
 
         <div className="w-full h-auto  mt-11">
           <div className="text-2xl font-extrabold text-white text-center sm:text-3xl xl:text-4xl">
-            <h1>Welcome to Property Rentals !</h1>
+            <h1>Welcome to Property Rental !</h1>
           </div>
           <div className="text-2xl font-bold mt-14 text-right mr-4 text-slate-300 md:text-3xl ">
             <h1>Sell or Rent your Property</h1>
-            <h1>on Property Rentals ...</h1>
+            <h1>on Property Rental ...</h1>
           </div>
         </div>
       </div>
