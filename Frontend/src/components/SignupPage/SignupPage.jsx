@@ -51,7 +51,7 @@ function SignupPage() {
         </div>
         <div className="mt-12 text-base sm:text-lg md:text-xl flex flex-col  sm:items-center lg:items-start  ">
           <div className="flex   space-x-11">
-            <h1 className="font-bold text-lg md:text-2xl">Name :</h1>
+            <h1 className="font-bold text-base md:text-2xl">Name :</h1>
             <div>
               <input
                 value={name}
