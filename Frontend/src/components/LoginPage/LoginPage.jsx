@@ -47,7 +47,7 @@ function LoginPage() {
         </div>
         <div className="mt-7 text-base sm:text-lg md:text-xl flex flex-col  sm:items-center lg:items-start  ">
           <div className="flex  space-x-12 mt-7 md:mt-9">
-            <h1 className="font-bold text-lg md:text-2xl">Email :</h1>
+            <h1 className="font-bold text-base md:text-2xl">Email :</h1>
             <div>
               <input
                 value={email}
@@ -62,7 +62,7 @@ function LoginPage() {
             </div>
           </div>
           <div className="flex  space-x-3 mt-7 md:mt-9">
-            <h1 className="font-bold text-lg md:text-2xl">Password :</h1>
+            <h1 className="font-bold text-base md:text-2xl">Password :</h1>
             <div>
               <input
                 value={password}
