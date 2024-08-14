@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 function Footer() {
   return (
     <div className=" border border-black bg-slate-300 h-36  lg:fixed w-full bottom-0  flex-col grid grid-cols-2 lg:h-28 xl:h-20 lg:flex lg:flex-row  text-xs md:text-sm lg:text-base">

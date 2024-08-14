@@ -8,14 +8,7 @@ import {
 import { Property } from "../models/Property.js";
 
 async function handleSignupUser(req, res) {
-  /**
-   * req -> data
-   * check name email password
-   * check if user already  exist from email
-   * if not ... sighnup user
-   * res -> user successfully created
-   */
-
+  
   let body = req.body;
 
   if (!body.name || !body.email || !body.password) {
@@ -25,7 +18,7 @@ async function handleSignupUser(req, res) {
   }
   body.email = body.email.toLowerCase();
 
-  // check existing user present or not
+
   const existingUser = await Users.find({ email: body.email });
 
   if (existingUser[0] !== undefined) {

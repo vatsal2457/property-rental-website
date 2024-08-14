@@ -158,7 +158,7 @@ const handleSubmitProperty = async() =>{
         </div>
       :
     <div className="pt-16 md:pt-20 flex justify-center ">
-      <div className=" flex flex-col text-base md:text-xl lg:text-xl  mt-10 mb-10 pb-14 w-11/12 md:w-4/6 lg:w-3/4 px-4 py-4 rounded-xl  bg-white border border-black">
+      <div className=" flex flex-col text-base md:text-xl lg:text-xl  mt-10 mb-10 md:mb-28 pb-7  w-11/12 md:w-4/6 lg:w-3/4 px-4 py-4 rounded-xl  bg-white border border-black">
         <div className="text-3xl md:text-4xl border-b border-black font-bold font-serif ">
           <h1>Enter Details !</h1>
         </div>
