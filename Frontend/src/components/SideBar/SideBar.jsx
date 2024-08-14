@@ -4,6 +4,7 @@ import { toggleSidebar } from "../../ReduxStore/sidebarSlice";
 import { useDispatch ,useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { toggleIsLogin } from "../../ReduxStore/isLoginSlice"; 
 function SideBar() {
   const sidebarOpen = useSelector((state) => state.sidebar.value)
   const dispatch = useDispatch()
@@ -21,15 +22,20 @@ function SideBar() {
         dispatch(toggleSidebar())
       })
       .catch((err)=>{
-        navigate('/login');
-        dispatch(toggleSidebar())
-        alert(err?.response?.data?.message)
+        if(err?.response?.status == 401){
+          localStorage.removeItem('token')
+          localStorage.removeItem('name')
+          dispatch(toggleIsLogin())
+          dispatch(toggleSidebar())
+          navigate('/login');
+          alert(err?.response?.data?.message)
+        }
+        
       })
     
   }
   const handleYourProperties = async(e)=>{
       e.preventDefault();
-      
         await axios({
           method:'GET',
           url:`${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/yourProperties`,
@@ -40,10 +46,18 @@ function SideBar() {
           dispatch(toggleSidebar())
         })
         .catch(err =>{
-          navigate('/login')
-          dispatch(toggleSidebar())
-          console.log(err?.response?.data?.message)
-          alert(err?.response?.data?.message);
+          if(err?.response?.status == 404){
+            navigate('/userproperties')
+            dispatch(toggleSidebar())
+          } else{
+            alert(err?.response?.data?.message);
+            localStorage.removeItem('token')
+            localStorage.removeItem('name')
+            dispatch(toggleIsLogin())
+            dispatch(toggleSidebar())
+            navigate('/login')
+          }
+         
         })
       }
        

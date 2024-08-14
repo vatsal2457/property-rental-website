@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleIsLogin } from "../../ReduxStore/isLoginSlice";
-import {setUserId,setUsername} from '../../ReduxStore/userDetailsSlice.js'
+import {setUsername} from '../../ReduxStore/userDetailsSlice.js'
 import { NavLink, useNavigate } from "react-router-dom";
 function LoginPage() {
 

@@ -10,7 +10,7 @@ const PropertySchema = new mongoose.Schema({
         default:''
     },
     phoneNo:{
-        type:String,
+        type:Number,
         required:true
     },
     propertyType:{

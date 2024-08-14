@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { State } from "../../Data/States";
 import axios from 'axios'
-import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function AddProperty() {
-  const imgRef = useRef(null)
+  const navigate = useNavigate()
+
 
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
@@ -13,7 +15,7 @@ function AddProperty() {
   const [propertyType, setPropertyType] = useState('');
   const [bhkType, setBhkType] = useState('');
   const [area, setArea] = useState('');
-  const [floor, setFloor] = useState('');
+  const [floor, setFloor] = useState('0');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
   const [address, setAddress] = useState('');
@@ -24,13 +26,34 @@ function AddProperty() {
   const [cities, setCities] = useState();
   const [deposit, setDeposit] = useState('');
   const [files, setFiles] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [propertyUploaded, setPropertyUploaded] = useState(true);
   
-
   useEffect(() => {
     setCities(State.find((item) => item.state == state)?.district);
   }, [state]);
 
+const handleIsPropertyPresent = async() =>{
+  await axios({
+    url: `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/yourproperties`,
+    method: "GET",
+    withCredentials: true,
+  }).then(res =>{
+    setPropertyUploaded(true);
+  })
+  .catch(err=>{
+    setPropertyUploaded(false);
+  })
+}
+
+useEffect(()=>{
+  handleIsPropertyPresent();
+},[])
+
 const handleSubmitProperty = async() =>{
+
+  setIsDisabled(true);
+
   if(
     fullname =="" ||
     email =="" ||
@@ -44,10 +67,10 @@ const handleSubmitProperty = async() =>{
     age =="" ||
     state =="" ||
     city =="" ||
-    address =="" || 
-    deposit ==""
+    address ==""
   ){
     alert('Fill all details')
+    setIsDisabled(false);
     return;
   }
 
@@ -73,7 +96,6 @@ const handleSubmitProperty = async() =>{
   formData.append('address',address)
   formData.append('deposit', deposit)
 
-  
   await axios({
     url:`${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/addProperty`,
     method:'POST',
@@ -81,13 +103,15 @@ const handleSubmitProperty = async() =>{
     data: formData
   })
     .then((res)=>{
-      alert('sent')
-      console.log(res)
+      handleResetForm();
+      navigate('/')
+      alert(res.data.message)
     })
     .catch(err => {
-      alert('error')
-      console.log(err)
+      alert(err?.response?.data?.message)
     })
+    
+    setIsDisabled(false);
 
 }
 
@@ -106,7 +130,6 @@ const handleSubmitProperty = async() =>{
     setPrice("");
     setAge("");
     setCities();
-    imgRef.current.value=''
   };
 
   const handleImages = async(e) =>{
@@ -124,6 +147,16 @@ const handleSubmitProperty = async() =>{
 
 
   return (
+    <div>
+      {
+      propertyUploaded ? 
+        <div className="text-2xl md:text-3xl xl:text-4xl font-bold text-black pt-16 md:pt-20 flex flex-col items-center justify-center h-72">
+          <div className="flex flex-col justify-center  items-center">
+          <h1>You Have a Property Uploaded !</h1>
+          <h1 className="text-base md:text-lg xl:text-xl text-slate-300 mt-1 md:mt-3">( You can upload only 1 Property )</h1>
+          </div>
+        </div>
+      :
     <div className="pt-16 md:pt-20 flex justify-center ">
       <div className=" flex flex-col text-base md:text-xl lg:text-xl  mt-10 mb-10 pb-14 w-11/12 md:w-4/6 lg:w-3/4 px-4 py-4 rounded-xl  bg-white border border-black">
         <div className="text-3xl md:text-4xl border-b border-black font-bold font-serif ">
@@ -258,8 +291,7 @@ const handleSubmitProperty = async() =>{
                   className="border border-black rounded-md px-1 py-1 w-1/3 "
                   placeholder="Floor"
                   required
-                  type="tel"
-                  defaultValue={0}
+                  type="text"
                   value={floor}
                   onChange={(e) => {
                     setFloor(e.target.value);
@@ -306,6 +338,7 @@ const handleSubmitProperty = async() =>{
                     placeholder="Deposit"
                     type="tel"
                     min="0"
+                    defaultValue='0'
                     value={deposit}
                     onChange={(e) => {
                       setDeposit(e.target.value);
@@ -396,7 +429,6 @@ const handleSubmitProperty = async() =>{
                     accept="image/*"
                     onChange={handleImages}
                     type="file"
-                    ref={imgRef}
                   />
                 </div>
                 {
@@ -426,13 +458,16 @@ const handleSubmitProperty = async() =>{
             Reset
           </button>
           <button 
-          className="text-xl px-4 py-1 bg-blue-500 active:bg-blue-600 text-white border border-black rounded-xl"
+          className={`text-xl px-4 py-1 bg-blue-500 active:bg-blue-600 text-white border border-black rounded-xl ${isDisabled ? "bg-gray-400" : "bg-blue-500"}`}
+          disabled = {isDisabled}
           onClick={handleSubmitProperty}
           >
             Submit
           </button>
         </div>
       </div>
+    </div>
+      }
     </div>
   );
 }

@@ -1,18 +1,21 @@
 import { Router } from 'express'
-import {handleSignupUser, handleLoginUser, handleLogoutUser, handleAddProperty} from '../controllers/Users.controller.js'
+import {handleSignupUser, handleLoginUser, handleLogoutUser, handleAddProperty, handleUserProperty, handleDeleteProperty, handleGetProperties} from '../controllers/Users.controller.js'
 import { verifyJWT } from '../middlewares/verifyJWT.js';
 import { upload } from '../middlewares/multer.js';
 
 const  UserRouter = Router();
 
-UserRouter.route('/signup') // http://localhost:3000/api/user/signup
+UserRouter.route('/signup') 
 .post(handleSignupUser)
 
-UserRouter.route('/login') // http://localhost:3000/api/user/login
+UserRouter.route('/login') 
 .post(handleLoginUser)
 
 UserRouter.route('/logout')
 .get(handleLogoutUser)
+
+UserRouter.route('/getproperties')
+.get(handleGetProperties)
 
 // Protected Routes
 
@@ -27,17 +30,13 @@ UserRouter.route('/addProperty')
         maxCount:5
     }]),
     handleAddProperty
-
 )
 
+UserRouter.route('/yourproperties')
+.get(verifyJWT,handleUserProperty)
 
-
-
-
-UserRouter.route('/yourProperties')
-.get(verifyJWT,(req,res)=>{
-    res.status(200).json({message:'SUCCESS'})
-})
+UserRouter.route('/yourproperties/deleteproperty')
+.delete(verifyJWT, handleDeleteProperty);
 
 
 

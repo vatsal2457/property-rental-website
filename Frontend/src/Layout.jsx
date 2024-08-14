@@ -1,9 +1,9 @@
-import React, { useState ,useEffect} from "react";
+import React, { useEffect} from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {setUserId,setUsername} from './ReduxStore/userDetailsSlice.js'
+import {setUsername} from './ReduxStore/userDetailsSlice.js'
 import { toggleIsLogin } from "./ReduxStore/isLoginSlice";
 
 function Layout() {
@@ -12,7 +12,6 @@ function Layout() {
   
   const fetchDataFromLocalStorage = () => {
     dispatch(setUsername(localStorage?.getItem('name')));
-    dispatch(setUserId(localStorage?.getItem('_id')));
   }
 
   useEffect(()=>{

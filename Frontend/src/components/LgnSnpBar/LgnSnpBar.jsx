@@ -29,7 +29,6 @@ function loginSignupBar() {
        dispatch(toggleIsLogin())
        dispatch(toggleLoginLogoutbar())
        navigate('/')
-       console.log(res)
        alert(res?.data?.message)
        })
        .catch((err)=>{
@@ -41,13 +40,7 @@ function loginSignupBar() {
         navigate('/')
         alert(err?.response?.data?.message)
        })
-       
-    
-     
-      
-      
-     
-    
+         
   }
   
   return (
