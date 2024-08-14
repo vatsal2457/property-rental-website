@@ -62,9 +62,14 @@ async function handleLoginUser(req, res) {
 
     if (passMatch) {
       const token = await user[0].generateToken();
+
       const options = {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
         maxAge: 24 * 60 * 60 * 1000,
       };
+
       return res.cookie("token", token, options).json({
         message: "Login Successfull",
         user,
