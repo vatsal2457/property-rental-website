@@ -104,10 +104,12 @@ const handleSubmitProperty = async() =>{
   })
     .then((res)=>{
       handleResetForm();
+      setIsDisabled(false);
       navigate('/')
       alert(res.data.message)
     })
     .catch(err => {
+      setIsDisabled(false);
       alert(err?.response?.data?.message)
     })
     
@@ -143,7 +145,6 @@ const handleSubmitProperty = async() =>{
     const images = imgArray.map(item => URL.createObjectURL(item))
     setImages(images);
   }
-
 
 
   return (
@@ -458,7 +459,7 @@ const handleSubmitProperty = async() =>{
             Reset
           </button>
           <button 
-          className={`text-xl px-4 py-1 bg-blue-500 active:bg-blue-600 text-white border border-black rounded-xl ${isDisabled ? "bg-gray-400" : "bg-blue-500"}`}
+          className={`text-xl px-4 py-1 bg-blue-500 active:bg-blue-600 text-white border border-black rounded-xl ${isDisabled ? "bg-gray-400 text-black" : "bg-blue-500"}`}
           disabled = {isDisabled}
           onClick={handleSubmitProperty}
           >
