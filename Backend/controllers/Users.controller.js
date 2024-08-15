@@ -17,7 +17,6 @@ async function handleSignupUser(req, res) {
     });
   }
   body.email = body.email.toLowerCase().trim();
-  body.password = body.password.trim();
 
   const existingUser = await Users.find({ email: body.email });
 
@@ -52,14 +51,13 @@ async function handleSignupUser(req, res) {
 async function handleLoginUser(req, res) {
   const body = req.body;
   body.email = body.email.toLowerCase().trim();
-  body.password = body.password.trim();
   const user = await Users.find({ email: body.email });
 
   if (user[0] == undefined) {
     return res.status(400).json({ message: "Invalid Email" });
   } else {
     const passMatch = bcrypt.compare(body.password, user[0].password);
-
+    console.log(passMatch);
     if (passMatch) {
       const token = await user[0].generateToken();
 
