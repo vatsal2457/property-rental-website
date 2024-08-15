@@ -122,19 +122,19 @@ function BuyorRent() {
           </div>
           <div className="w-full  mt-4 flex flex-col space-y-5">
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Name : </h1>
-              <h1 className="text-lg text-center break-all">{property.fullname}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Name : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.fullname}</h1>
             </div>
             <div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Email : </h1>
-              <h1 className="text-lg text-center break-all">{property.email}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Email : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.email}</h1>
             </div>
             </div>
             <div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Phone : </h1>
-              <h1 className="text-lg text-center break-all">{property.phoneNo}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Phone : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.phoneNo}</h1>
             </div>
             </div>
           </div>
@@ -145,40 +145,40 @@ function BuyorRent() {
           </div>
           <div className="w-full  mt-4 flex flex-col space-y-5">
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Property Type : </h1>
-              <h1 className="text-lg text-center break-all">{property.propertyType}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Property Type : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.propertyType}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Sell or Rent : </h1>
-              <h1 className="text-lg text-center break-all">{property.sellOrRent}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Sell or Rent : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.sellOrRent}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">BHK : </h1>
-              <h1 className="text-lg text-center break-all">{property.bhkType}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">BHK : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.bhkType}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Area (sq.ft) : </h1>
-              <h1 className="text-lg text-center">{property.area} </h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Area (sq.ft) : </h1>
+              <h1 className="md:text-lg text-base text-center">{property.area} </h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">No of Floor : </h1>
-              <h1 className="text-lg text-center break-all">{property.floor}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">No of Floor : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.floor}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Price : </h1>
-              <h1 className="text-lg text-center break-all">{property.expectedPrice}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Price : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.expectedPrice}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Rent : </h1>
-              <h1 className="text-lg text-center break-all">{property.expectedRent}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Rent : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.expectedRent}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Deposit : </h1>
-              <h1 className="text-lg text-center break-all">{property.deposit}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Deposit : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.deposit}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Age of Property : </h1>
-              <h1 className="text-lg text-center">{property.ageOfProperty}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Age of Property : </h1>
+              <h1 className="md:text-lg text-base text-center">{property.ageOfProperty}</h1>
             </div>
           </div>
         </div>
@@ -188,16 +188,16 @@ function BuyorRent() {
           </div>
           <div className="w-full  mt-4 flex flex-col space-y-5">
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">State : </h1>
-              <h1 className="text-lg text-center break-all">{property.state}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">State : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.state}</h1>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">City : </h1>
-              <h1 className="text-lg text-center break-all">{property.city}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">City : </h1>
+              <h1 className="md:text-lg text-base text-center break-all">{property.city}</h1>
             </div>
             <div className=" grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-              <h1 className="font-bold text-lg text-center">Address : </h1>
-              <h1 className="text-lg text-center text-wrap break-all">{property.address}</h1>
+              <h1 className="font-bold md:text-lg text-base text-center">Address : </h1>
+              <h1 className="md:text-lg text-base text-center text-wrap break-all">{property.address}</h1>
             </div>
           </div>
         </div>

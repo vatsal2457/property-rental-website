@@ -19,8 +19,8 @@ function LoginPage() {
       method: "post",
       url: `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/login`,
       data: {
-        email: email,
-        password: password,
+        email: email.trim(),
+        password: password.trim(),
       },
       withCredentials:true
     })

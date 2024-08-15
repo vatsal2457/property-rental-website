@@ -24,9 +24,9 @@ function SignupPage() {
        url: `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/signup`,
        method: "post",
        data: {
-         name: name,
-         email: email,
-         password: password,
+         name: name.trim(),
+         email: email.trim(),
+         password: password.trim(),
        },
      })
      .catch(err=>{
