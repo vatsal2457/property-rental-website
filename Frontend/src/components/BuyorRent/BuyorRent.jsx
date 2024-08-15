@@ -11,13 +11,14 @@ function BuyorRent() {
   const [properties, setProperties] = useState([])
   const [property, setProperty] = useState({})
   const [propertyOpen, setPropertyOpen] = useState(false)
+  const [isSearch, setIsSearch] =  useState(false);
   useEffect(() => {
     setCities(State.find((item) => item.state == state)?.district);
   }, [state]);
 
   const handleGetProperties = async(e) => {
     e.preventDefault();
-  
+    setIsSearch(true);
     await axios({
       url:`${import.meta.env.VITE_BACKEND_SERVER_URL}/api/user/getproperties`,
       method:'get',
@@ -32,7 +33,7 @@ function BuyorRent() {
       alert(err?.response?.data?.message)
       setPropertyFound(false);
     })
-
+    setIsSearch(false);
   };
 
   const handleOpenPropertyTab = async(item) =>{
@@ -84,8 +85,9 @@ function BuyorRent() {
         </div>
         <button 
         className="md:mt-6"
+        disabled = {isSearch}
         onClick={handleGetProperties}>
-          <div className="flex space-x-2 bg-red-500 active:bg-red-600 mt-8 md:mt-0 px-4 py-2 text-white text-lg md:text-xl font-semibold rounded-lg">
+          <div className={`flex space-x-2 bg-red-500 active:bg-red-600 mt-8 md:mt-0 px-4 py-2 text-white text-lg md:text-xl font-semibold rounded-lg ${isSearch? 'bg-slate-300 text-black' : ''}`}>
             <h1>Search</h1>
             <img className="h-7 w-7" src="/searchIcon.png" alt="Search Icon" />
           </div>
