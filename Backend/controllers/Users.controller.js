@@ -90,8 +90,8 @@ async function handleLogoutUser(req, res) {
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: 'Lax',
-    domain: 'https://property-rental.onrender.com'
+    sameSite: 'Strict',
+    // domain: 'https://property-rental.onrender.com'
   };
   res.clearCookie("token",options);
   res.status(200).json({
