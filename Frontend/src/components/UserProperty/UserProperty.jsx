@@ -106,19 +106,19 @@ const deleteProperty = async(e) => {
               </div>
               <div className="w-full  mt-4 flex flex-col space-y-5">
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Name : </h1>
-                  <h1 className="text-lg text-center break-all">{fullname}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Name : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{fullname}</h1>
                 </div>
                 <div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Email : </h1>
-                  <h1 className="text-lg text-center break-all">{email}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Email : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{email}</h1>
                 </div>
                 </div>
                 <div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Phone : </h1>
-                  <h1 className="text-lg text-center break-all">{phNumber}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Phone : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{phNumber}</h1>
                 </div>
                 </div>
               </div>
@@ -129,40 +129,40 @@ const deleteProperty = async(e) => {
               </div>
               <div className="w-full  mt-4 flex flex-col space-y-5">
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Property Type : </h1>
-                  <h1 className="text-lg text-center break-all">{propertyType}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Property Type : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{propertyType}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Sell or Rent : </h1>
-                  <h1 className="text-lg text-center">{sellorRent}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Sell or Rent : </h1>
+                  <h1 className="md:text-lg text-base text-center">{sellorRent}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">BHK : </h1>
-                  <h1 className="text-lg text-center break-all">{bhkType}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">BHK : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{bhkType}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Area : </h1>
-                  <h1 className="text-lg text-center break-all">{area}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Area : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{area}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">No of Floor : </h1>
-                  <h1 className="text-lg text-center">{floor}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">No of Floor : </h1>
+                  <h1 className="md:text-lg text-base text-center">{floor}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Price : </h1>
-                  <h1 className="text-lg text-center break-all">{expectedPrice}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Price : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{expectedPrice}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Rent : </h1>
-                  <h1 className="text-lg text-center break-all">{expectedRent}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Rent : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{expectedRent}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Deposit : </h1>
-                  <h1 className="text-lg text-center break-all">{deposit}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Deposit : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{deposit}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Age of Property : </h1>
-                  <h1 className="text-lg text-center">{ageOfProperty}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Age of Property : </h1>
+                  <h1 className="md:text-lg  text-base text-center">{ageOfProperty}</h1>
                 </div>
               </div>
             </div>
@@ -172,16 +172,16 @@ const deleteProperty = async(e) => {
               </div>
               <div className="w-full  mt-4 flex flex-col space-y-5">
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">State : </h1>
-                  <h1 className="text-lg text-center break-all">{state}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">State : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{state}</h1>
                 </div>
                 <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">City : </h1>
-                  <h1 className="text-lg text-center break-all">{city}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">City : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{city}</h1>
                 </div>
                 <div className=" grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
-                  <h1 className="font-bold text-lg text-center">Address : </h1>
-                  <h1 className="text-lg text-center break-all">{address}</h1>
+                  <h1 className="font-bold md:text-lg text-base text-center">Address : </h1>
+                  <h1 className="md:text-lg text-base text-center break-all">{address}</h1>
                 </div>
               </div>
             </div>
