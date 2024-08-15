@@ -128,7 +128,7 @@ function BuyorRent() {
             <div>
             <div className="grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
               <h1 className="font-bold text-lg text-center">Email : </h1>
-              <h1 className="text-lg text-center">{property.email}</h1>
+              <h1 className="text-lg text-center text-wrap">{property.email}</h1>
             </div>
             </div>
             <div>
@@ -197,7 +197,7 @@ function BuyorRent() {
             </div>
             <div className=" grid grid-cols-2 w-full bg-slate-300 py-2 rounded-xl">
               <h1 className="font-bold text-lg text-center">Address : </h1>
-              <h1 className="text-lg text-center">{property.address}</h1>
+              <h1 className="text-lg text-center text-wrap">{property.address}</h1>
             </div>
           </div>
         </div>
