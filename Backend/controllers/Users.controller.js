@@ -67,6 +67,7 @@ async function handleLoginUser(req, res) {
         httpOnly: true,
         secure: true,
         sameSite: 'None',
+        domain: `${process.env.FRONTEND_URL}`,
         maxAge: 24 * 60 * 60 * 1000,
       };
 
