@@ -16,8 +16,8 @@ async function handleSignupUser(req, res) {
       message: "All fields required",
     });
   }
-  body.email = body.email.toLowerCase();
-
+  body.email = body.email.toLowerCase().trim();
+  body.password = body.password.trim();
 
   const existingUser = await Users.find({ email: body.email });
 
@@ -31,7 +31,7 @@ async function handleSignupUser(req, res) {
   const securePassword = await bcrypt.hash(body.password, salt);
 
   const user = await Users.create({
-    name: body.name,
+    name: body.name.trim(),
     email: body.email,
     password: securePassword,
   }).catch((err) => {
@@ -51,8 +51,8 @@ async function handleSignupUser(req, res) {
 
 async function handleLoginUser(req, res) {
   const body = req.body;
-  body.email = body.email.toLowerCase();
-
+  body.email = body.email.toLowerCase().trim();
+  body.password = body.password.trim();
   const user = await Users.find({ email: body.email });
 
   if (user[0] == undefined) {
