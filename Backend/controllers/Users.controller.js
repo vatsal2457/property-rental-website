@@ -56,9 +56,9 @@ async function handleLoginUser(req, res) {
   if (user[0] == undefined) {
     return res.status(400).json({ message: "Invalid Email" });
   } else {
-    const passMatch = bcrypt.compare(body.password, user[0].password);
-    console.log(passMatch);
-    if (passMatch) {
+
+     bcrypt.compare(body.password, user[0].password).then(async(passMatch) =>{
+      console.log(passMatch)
       const token = await user[0].generateToken();
 
       const options = {
@@ -73,9 +73,10 @@ async function handleLoginUser(req, res) {
         user,
         token,
       });
-    } else {
-      res.status(400).json({ message: "Invalid Password" });
-    }
+     }).catch((err)=>{
+        console.log(err)
+        return res.status(400).json({ message: "Invalid Password" });
+     })
   }
 }
 
