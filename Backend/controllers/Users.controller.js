@@ -87,7 +87,12 @@ async function handleLogoutUser(req, res) {
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
   if (!decodedToken) return res.status(401).json({ message: "Unauthorized" });
 
-  res.clearCookie("token");
+  const options = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+  };
+  res.clearCookie("token",options);
   res.status(200).json({
     message: "Logout Successfull",
   });
