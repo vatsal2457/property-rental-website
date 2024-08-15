@@ -8,11 +8,12 @@ function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
   const handleLoginUser = async (e) => {
-
+    setIsSubmit(true);
     e.preventDefault();
 
     const response = await axios({
@@ -37,7 +38,7 @@ function LoginPage() {
       alert(response?.data?.message)
       navigate('/');
     } 
-    
+    setIsSubmit(false);
   };
   return (
     <div className="pt-16 md:pt-20 w-full flex justify-center items-center  ">
@@ -80,7 +81,8 @@ function LoginPage() {
         <div className="w-full flex justify-center items-center mt-7 md:mt-10">
           <button
             onClick={handleLoginUser}
-            className="bg-blue-500 active:bg-blue-600 border border-black text-lg md:text-2xl px-4 py-1 text-white rounded-xl"
+            disabled={isSubmit}
+            className={`bg-blue-500 active:bg-blue-600 border border-black text-lg md:text-2xl px-4 py-1 text-white rounded-xl ${isSubmit? 'bg-slate-300 text-black' :''}`}
           >
             Login
           </button>

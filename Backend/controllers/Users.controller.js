@@ -58,7 +58,6 @@ async function handleLoginUser(req, res) {
   } else {
 
      bcrypt.compare(body.password, user[0].password).then(async(passMatch) =>{
-
       if(passMatch){
         const token = await user[0].generateToken();
         const options = {
@@ -67,7 +66,6 @@ async function handleLoginUser(req, res) {
           sameSite: 'None',
           maxAge: 24 * 60 * 60 * 1000,
         };
-  
         return res.cookie("token", token, options).json({
           message: "Login Successfull",
           user,
@@ -76,7 +74,6 @@ async function handleLoginUser(req, res) {
       }else{
         return res.status(400).json({ message: "Invalid Password" });
       }
-     
      })
         
      

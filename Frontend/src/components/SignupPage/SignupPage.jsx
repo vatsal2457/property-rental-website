@@ -7,17 +7,24 @@ function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [isSubmit, setIsSubmit] = useState(false)
+  
   const handleSignupUser = async (e) => {
+    
     e.preventDefault();
+    setIsSubmit(true)
+
     if(name==''){
        alert('Please fill name')
+       setIsSubmit(false);
     }
     else if(email==''){
       alert('Please fill Email')
+      setIsSubmit(false);
     }
     else if(password==''){
       alert('Please fill Password')
+      setIsSubmit(false);
     }
     else{
      const response =  await axios({
@@ -40,6 +47,7 @@ function SignupPage() {
      setPassword('')
      navigate('/login')
      }
+     setIsSubmit(false);
   }
 };
 
@@ -99,7 +107,8 @@ function SignupPage() {
         <div className=" w-full flex justify-center items-center mt-7 md:mt-10">
           <button
             onClick={handleSignupUser}
-            className="bg-blue-500 active:bg-blue-600 border border-black text-lg md:text-2xl px-4 py-1 text-white rounded-xl"
+            disabled = {isSubmit}
+            className={`bg-blue-500 active:bg-blue-600 border border-black text-lg md:text-2xl px-4 py-1 text-white rounded-xl ${isSubmit? 'bg-slate-300 text-black':''}`}
           >
             SignUp
           </button>
