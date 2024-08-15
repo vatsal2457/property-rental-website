@@ -67,6 +67,7 @@ async function handleLoginUser(req, res) {
         httpOnly: true,
         secure: true,
         sameSite: 'Lax',
+        domain: 'https://property-rental.onrender.com',
         maxAge: 24 * 60 * 60 * 1000,
       };
 
@@ -90,8 +91,7 @@ async function handleLogoutUser(req, res) {
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: 'None',
-    // domain: 'https://property-rental.onrender.com'
+    sameSite: 'Lax',
   };
   res.clearCookie("token",options);
   res.status(200).json({
