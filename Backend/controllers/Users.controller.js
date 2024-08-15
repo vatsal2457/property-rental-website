@@ -66,7 +66,7 @@ async function handleLoginUser(req, res) {
       const options = {
         httpOnly: true,
         secure: true,
-        sameSite: 'None',
+        sameSite: 'Lax',
         maxAge: 24 * 60 * 60 * 1000,
       };
 
@@ -90,7 +90,7 @@ async function handleLogoutUser(req, res) {
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: 'None',
+    sameSite: 'Lax',
   };
   res.clearCookie("token",options);
   res.status(200).json({
