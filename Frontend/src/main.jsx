@@ -38,7 +38,6 @@ import UserProperty from "./components/UserProperty/UserProperty.jsx";
 
  const router = (
   <BrowserRouter>
-    <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="buyorrent" element={<BuyorRent />} />
@@ -48,7 +47,6 @@ import UserProperty from "./components/UserProperty/UserProperty.jsx";
         <Route path="addproperty" element={<AddProperty />} />
         <Route path="userproperties" element={<UserProperty />} />
       </Route>
-    </Routes>
   </BrowserRouter>
  );
 
