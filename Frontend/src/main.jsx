@@ -22,35 +22,19 @@ import UserProperty from "./components/UserProperty/UserProperty.jsx";
 
 
 
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<Layout />}>
-//       <Route path="" element={<Home />} />
-//       <Route path="buyorrent" element={<BuyorRent />} />
-//       <Route path="login" element={<LoginPage />} />
-//       <Route path="signup" element={<SignupPage />} />
-//       <Route path="about" element={<About />} />
-//       <Route path="addproperty" element={<AddProperty />} />
-//       <Route path="userproperties" element={<UserProperty />} />
-//     </Route>
-//   )
-// );
-
- const router = (
-  <BrowserRouter>
-  <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="" element={<Home />} />
-        <Route path="buyorrent" element={<BuyorRent />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="signup" element={<SignupPage />} />
-        <Route path="about" element={<About />} />
-        <Route path="addproperty" element={<AddProperty />} />
-        <Route path="userproperties" element={<UserProperty />} />
-      </Route>
- </Routes>
-  </BrowserRouter>
- );
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route path="" element={<Home />} />
+      <Route path="buyorrent" element={<BuyorRent />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signup" element={<SignupPage />} />
+      <Route path="about" element={<About />} />
+      <Route path="addproperty" element={<AddProperty />} />
+      <Route path="userproperties" element={<UserProperty />} />
+    </Route>
+  )
+);
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
